@@ -13,4 +13,7 @@ module ApplicationHelper
 		return "produção" if Rails.env.production?
 	end
 
+	def mining_types_options(coin)
+		options_for_select(MiningType.all.collect{ |m| [m.description, m.id] }, selected: coin.mining_type.id)
+	end
 end

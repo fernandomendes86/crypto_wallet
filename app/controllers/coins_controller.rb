@@ -2,7 +2,7 @@ class CoinsController < ApplicationController
   
   #layout "adm"
 
-  before_action :set_coin, only: [:show, :edit, :update, :destroy]
+  before_action :set_coin, only: [:show, :edit, :update, :destroy, :salvar_mining_types]
   before_action :set_mining_type_options, only: [:new, :create, :edit, :update]
 
   # GET /coins
@@ -62,6 +62,19 @@ class CoinsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to coins_url, notice: 'Coin was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def salvar_mining_types
+    @coin.mining_type_id = params[:mining_type_id]
+    respond_to do |format|
+      if @coin.save
+        format.html { redirect_to @coin, notice: 'Coin was successfully updated.' }
+        format.json { render :show, status: :ok, location: @coin }
+      else
+        format.html { render :edit }
+        format.json { render json: @coin.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -24,5 +24,13 @@
 
 </form>
 
-<%= link_to t('links.edit'), edit_coin_path(@coin), class: "btn btn-primary" %> |
-<%= link_to t('links.back'), coins_path, class: "btn btn-primary" %>
+<%= form_tag(salvar_mining_types_path(id: @coin.id)) do %>
+
+  <%= link_to t('links.edit'), edit_coin_path(@coin), class: "btn btn-primary" %> |
+  <%= link_to t('links.back'), coins_path, class: "btn btn-primary" %> |
+  <%= link_to "+ Mudar Tipo", mostra_funcao_path(coin_id: @coin.id), :remote => true %>
+
+  <span id = "div_id">
+    
+  </span>
+<% end %>
